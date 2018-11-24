@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    username: postgres
+    password: Tsunami9
+    driverClassName: org.postgresql.Driver
+    driverDialect: org.hibernate.dialect.PostgreSQL82Dialect
+    url: jdbc:postgresql://localhost/idmbroker
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 400
+
+server:
+  port: 8080
+
+resteasy:
+  deployment:
+    async_job_service_enabled: true
+
+
+keycloak:
+  server:
+    contextPath: /auth
+    adminUser:
+       username: admin
+       password: admin
+
+
+

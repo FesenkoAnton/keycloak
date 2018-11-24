@@ -1,0 +1,69 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.6.RELEASE")
+    }
+}
+
+plugins {
+    id 'java'
+    id "org.springframework.boot" version "2.0.6.RELEASE"
+}
+
+group 'com.infopulse'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven{
+        url "https://mvnrepository.com/artifact"
+    }
+}
+
+configurations.all {
+     exclude group:"ch.qos.logback", module:"logback-core"
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'org.springframework.boot:spring-boot:2.0.6.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-web:2.0.6.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-actuator:2.0.6.RELEASE'
+    compile 'org.springframework:spring-jdbc:5.1.1.RELEASE'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.9.7'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.9.7'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.7'
+    compile 'org.jboss.resteasy:resteasy-servlet-initializer:3.6.1.Final'
+    compile 'org.jboss.resteasy:resteasy-jackson2-provider:3.6.1.Final'
+    compile 'org.jboss.resteasy:resteasy-jaxb-provider:3.6.1.Final'
+    compile 'org.infinispan:infinispan-core:9.2.4.Final'
+    compile 'org.keycloak:keycloak-model-infinispan:4.5.0.Final'
+    compile ('org.keycloak:keycloak-services:4.5.0.Final'){
+         exclude group: 'org.jboss.spec.javax.servlet', module:'jboss-servlet-api_3.0_spec'
+    }
+    compile 'org.keycloak:keycloak-model-jpa:4.5.0.Final'
+    compile 'org.keycloak:keycloak-js-adapter:4.5.0.Final'
+    compile 'org.keycloak:keycloak-themes:4.5.0.Final'
+    compile 'org.keycloak:keycloak-saml-core:4.5.0.Final'
+    compile 'org.keycloak:keycloak-authz-policy-common:4.5.0.Final'
+    compile 'org.springframework.boot:spring-boot-starter-jdbc:2.0.6.RELEASE'
+    compile 'com.h2database:h2:1.4.197'
+    compile 'org.freemarker:freemarker:2.3.28'
+    compile 'org.springframework.boot:spring-boot-devtools:2.0.6.RELEASE'
+    compile 'org.springframework.boot:spring-boot-configuration-processor:2.0.6.RELEASE'
+    compile 'org.hibernate:hibernate-core:5.1.15.Final'
+    compile 'org.postgresql:postgresql:9.4-1200-jdbc41'
+    compile 'org.slf4j:slf4j-simple:1.7.7'
+    compile(group: 'com.zaxxer', name: 'HikariCP', version: '2.7.9') {
+        exclude(module: 'tools')
+    }
+    testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.6.RELEASE'
+}
+
+bootJar {
+    mainClassName = 'com.infopulse.keycloak.EmbeddedKeycloakApp'
+}
