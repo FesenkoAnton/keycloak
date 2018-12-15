@@ -4,11 +4,26 @@ spring:
     password: Tsunami9
     driverClassName: org.postgresql.Driver
     driverDialect: org.hibernate.dialect.PostgreSQL82Dialect
-    url: jdbc:postgresql://localhost/idmbroker
+    url: jdbc:postgresql://localhost/keycloakbroker
     hikari:
       minimum-idle: 1
       maximum-pool-size: 400
 
+  cloud:
+    stream:
+      kafka:
+        binder:
+          zkNodes: localhost
+          brokers: localhost
+      bindings:
+          kafka:
+              binder:
+                headers: version, action, EventVersion, EntityVersion
+          user-event-input:
+              destination: user-event
+              contentType: application/json
+              consumer:
+                 headerMode: raw
 server:
   port: 8080
 
@@ -18,6 +33,9 @@ resteasy:
 
 
 keycloak:
+  appRealm: chat
+  idmBrokerAuthUrl: http://localhost:8080/auth
+  idmBrokerApp: app-broker
   server:
     contextPath: /auth
     adminUser:
